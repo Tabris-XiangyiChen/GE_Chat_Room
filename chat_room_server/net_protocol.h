@@ -4,10 +4,13 @@
 #include <cstring>
 
 enum class MessageType {
+    // connect to the server
     CLIENT_CONNECT = 1,
     CLIENT_DISCONNECT = 2,
+    // public and private message
     PUBLIC_MESSAGE = 3,
     PRIVATE_MESSAGE = 4,
+    // userlist message for update the online user
     USER_LIST_UPDATE = 5,
 };
 

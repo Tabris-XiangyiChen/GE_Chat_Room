@@ -35,7 +35,7 @@ struct ChatMessage {
 };
 
 enum class NetworkEventType {
-    CONNECTED = 0,
+    CONNECTED = 0, // didn't use
     DISCONNECTED,
     PUBLIC_MESSAGE,
     PRIVATE_MESSAGE,
@@ -71,6 +71,7 @@ public:
     std::thread recieve_thread;
     std::atomic<bool> running;
     std::queue<NetworkEvent> event_queue;
+    std::mutex event_mutex;
 
     FMOD::System* system;
 

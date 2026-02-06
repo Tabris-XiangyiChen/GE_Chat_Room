@@ -18,7 +18,7 @@ public:
     std::mutex clients_mutex;
     bool running;
 
-    std::vector<std::thread> client_threads;
+    //std::vector<std::thread> client_threads;
 
     ChatServer() : server_socket(INVALID_SOCKET), running(false) 
     {}
@@ -67,6 +67,8 @@ public:
         std::cout << "Chat Server started on port " << port << std::endl;
 
         std::thread acceptThread(&ChatServer::accept_client, this);
+        // detach thread, when close the server, the while loop
+        // in thread will break, thread will be release
         acceptThread.detach();
 
         return true;
@@ -187,15 +189,18 @@ public:
         // send to new user
         //
         send_userlist(client_socket);
-        // send to all user
+        // send a public message to all user
         PublicMessage message("System", username + " joined the chat");
         MessageHeader send_header(MessageType::PUBLIC_MESSAGE, sizeof(PublicMessage));
 
-        for (const auto& client : clients) {
-            // not send to myself
-            if (client.second != username) {
-                send(client.first, (char*)&send_header, sizeof(send_header), 0);
-                send(client.first, (char*)&message, sizeof(message), 0);
+        {
+            std::lock_guard<std::mutex> lock(clients_mutex);
+            for (const auto& client : clients) {
+                // not send to myself
+                if (client.second != username) {
+                    send(client.first, (char*)&send_header, sizeof(send_header), 0);
+                    send(client.first, (char*)&message, sizeof(message), 0);
+                }
             }
         }
         broadcast_userlist();
@@ -256,7 +261,6 @@ public:
                 }
             }
             else if (header.type == MessageType::CLIENT_DISCONNECT) {
-
                 std::cout << "Client " << username << " requested disconnect" << std::endl;
                 break;
             }

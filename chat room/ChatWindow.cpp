@@ -62,7 +62,10 @@ void ChatWindow::recive_message() {
         }
 
 
-        event_queue.push(event);
+        {
+            std::lock_guard<std::mutex> lock(event_mutex);
+            event_queue.push(event);
+        }
         // if not my message,paly sound
         if (event.sender != username)
             ChatWindow::play_music(event.type);
@@ -224,13 +227,17 @@ void ChatWindow::process_event() {
 
     while (!event_queue.empty()) {
         // get event
-        NetworkEvent event = event_queue.front();
-        event_queue.pop();
+        NetworkEvent event;
+        {
+            std::lock_guard<std::mutex> lock(event_mutex);
+            event = event_queue.front();
+            event_queue.pop();
+        }
 
         switch (event.type) {
         case NetworkEventType::DISCONNECTED:
             connected = false;
-
+            close_connect();
             public_message.push_back(ChatMessage("System", "Connect lost"));
             // clear all users
             users_online.clear();
