@@ -1,0 +1,6 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/chat room/.vs/chat room
+/chat_room_server/.vs/chat_room_server
