@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "chat room\\x64\\Debug\\net_protocol.obj",
+            "outputs": [
+                "chat room\\x64\\Debug\\net_protocol.h_3236550557C1E5ED.ifc.dt.module.json",
+                "chat room\\x64\\Debug\\net_protocol.h_3236550557C1E5ED.ifc.dt.d.json",
+                "chat room\\x64\\Debug\\net_protocol.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\Users\\u5752303\\Desktop\\Games Engineering\\assignment\\GE_Chat_Room\\chat room\\net_protocol.h",
+                    "source-path": "c:\\users\\u5752303\\desktop\\games engineering\\assignment\\ge_chat_room\\chat room\\net_protocol.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

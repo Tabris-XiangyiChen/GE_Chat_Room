@@ -1,0 +1,12 @@
+﻿  ChatWindow.cpp
+C:\Users\u5752303\Desktop\Games Engineering\assignment\GE_Chat_Room\chat room\ChatWindow.cpp(492,65): warning C5056: operator '!=': deprecated for array types
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_dx11.cpp
+  imgui_impl_win32.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  main.cpp
+  Generating Code...
+  chat room.vcxproj -> C:\Users\u5752303\Desktop\Games Engineering\assignment\GE_Chat_Room\chat room\x64\Debug\chat room.exe
